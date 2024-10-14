@@ -36,6 +36,7 @@ public class Preferences {
     protected final BooleanProperty ignoreMouseTransparent = new SimpleBooleanProperty(false);
     protected final BooleanProperty enableEventLog = new SimpleBooleanProperty(false); // non-UI
     protected final IntegerProperty maxEventLogSize = new SimpleIntegerProperty(DEFAULT_EVENT_LOG_SIZE);
+    protected final BooleanProperty darkMode = new SimpleBooleanProperty(false);
 
     protected final HostServices hostServices;
 
@@ -206,6 +207,21 @@ public class Preferences {
         maxEventLogSize.set(size);
     }
 
+    /**
+     * Activates or deactivates dark mode for the dev tools UI.
+     */
+    public BooleanProperty darkModeProperty() {
+        return darkMode;
+    }
+
+    public boolean getDarkMode() {
+        return darkMode.get();
+    }
+
+    public void setDarkMode(boolean darkMode) {
+        this.darkMode.set(darkMode);
+    }
+
     @Override
     public String toString() {
         return "Preferences{" +
@@ -219,6 +235,7 @@ public class Preferences {
             ", ignoreMouseTransparent=" + ignoreMouseTransparent +
             ", enableEventLog=" + enableEventLog +
             ", maxEventLogSize=" + maxEventLogSize +
+            ", darkMode=" + darkMode +
             ", hostServices=" + hostServices +
             '}';
     }

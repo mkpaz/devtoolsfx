@@ -10,7 +10,7 @@
   -palette-color-accent:        #0969da;
   -palette-color-danger:        #cf222e;
   -palette-color-success:       #1a7f37;
-  -palette-color-warning:       #fff8c5;
+  -palette-text-highlight:      #fff8c5;
 
   /* base */
   -fx-background-color: -palette-color-bg;
@@ -38,7 +38,7 @@
   -color-input-border: -palette-color-border;
   -color-input-bg-focused: -palette-color-bg;
   -color-input-border-focused: -palette-color-accent;
-  -color-input-bg-readonly: -palette-color-bg-hover;
+  -color-input-bg-readonly: -palette-color-bg;
   -color-input-bg-highlight: -palette-color-neutral;
   -color-input-fg-highlight: -palette-color-fg;
 
@@ -54,6 +54,20 @@
   -color-button-bg-pressed: -palette-color-bg;
   -color-button-fg-pressed: -color-button-fg;
   -color-button-border-pressed: -palette-color-border;
+}
+
+.root:dark {
+  -palette-color-bg:            #202124;
+  -palette-color-bg-hover:      #36373a;
+  -palette-color-fg:            #c9d1d9;
+  -palette-color-fg-muted:      #6e7681;
+  -palette-color-border:        #42474e;
+  -palette-color-neutral:       #3d3d3d;
+  -palette-color-neutral-hover: #313131;
+  -palette-color-accent:        #58a6ff;
+  -palette-color-danger:        #f85149;
+  -palette-color-success:       #1a7f37;
+  -palette-text-highlight:      #bb800940;
 }
 
 /******************************************************************************
@@ -608,7 +622,7 @@ Text {
   -fx-padding: 0;
 }
 #scene-graph-tree .tree-cell:filtered .label {
-  -fx-background-color: -palette-color-warning;
+  -fx-background-color: -palette-text-highlight;
 }
 
 #scene-graph-search-field {
@@ -816,6 +830,9 @@ Text {
   -fx-max-height: 0.9em;
   -fx-background-color: -palette-color-fg;
 }
+#stylesheet-tab .tree-table-row-cell > .tree-table-cell {
+  -fx-alignment: BASELINE_LEFT;
+}
 
 /******************************************************************************
 * Environment
@@ -912,11 +929,9 @@ Text {
 .text-view {
   -fx-padding: 0;
 }
+
 .text-view .text-area {
   -fx-font-family: monospaced;
-  -fx-background-insets: 0;
-  -fx-background-radius: 0;
-  -fx-border: 0;
 }
 
 .hyperlink:empty {

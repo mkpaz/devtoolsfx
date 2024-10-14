@@ -8,7 +8,6 @@ import devtoolsfx.gui.controls.TextView;
 import devtoolsfx.gui.util.Formatters;
 import devtoolsfx.gui.util.GUIHelpers;
 import javafx.css.PseudoClass;
-
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
@@ -231,7 +230,13 @@ public final class EventLogTab extends VBox {
 
     private Dialog<TextView> getOrCreateTextViewDialog() {
         if (textViewDialog == null) {
-            textViewDialog = new Dialog<>(new TextView(), "Log Entry", 640, 480);
+            textViewDialog = new Dialog<>(
+                new TextView(),
+                "Log Entry",
+                640,
+                480,
+                toolPane.getPreferences().getDarkMode()
+            );
         }
 
         return textViewDialog;

@@ -1,6 +1,7 @@
 package devtoolsfx.gui.controls;
 
 import devtoolsfx.gui.GUI;
+import javafx.css.PseudoClass;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
@@ -15,32 +16,42 @@ import java.util.Objects;
 @NullMarked
 public final class Dialog<P extends Parent> extends Stage {
 
+    private static final PseudoClass DARK_MODE = PseudoClass.getPseudoClass("dark");
     private static final double DEFAULT_WIDTH = 640;
     private static final double DEFAULT_HEIGHT = 480;
 
     private final P root;
 
-    public Dialog(P root) {
-        this(root, "", DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    public Dialog(P root, boolean darkMode) {
+        this(root, "", DEFAULT_WIDTH, DEFAULT_HEIGHT, darkMode);
     }
 
-    public Dialog(P root, String title, double width, double height) {
+    public Dialog(P root,
+                  String title,
+                  double width,
+                  double height,
+                  boolean darkMode) {
         super();
 
         this.root = Objects.requireNonNull(root, "parent node cannot be null");
-        createLayout(root, title, width, height);
+        createLayout(root, title, width, height, darkMode);
     }
 
     public P getRoot() {
         return root;
     }
 
-    private void createLayout(P parent, String title, double width, double height) {
+    public void toggleDarkMode(boolean darkMode) {
+        getRoot().pseudoClassStateChanged(DARK_MODE, darkMode);
+    }
+
+    private void createLayout(P parent, String title, double width, double height, boolean darkMode) {
         setTitle(title);
         initModality(Modality.NONE);
 
         var scene = new Scene(parent);
-        scene.getStylesheets().add(GUI.USER_AGENT_STYLESHEET);
+        scene.setUserAgentStylesheet(GUI.USER_AGENT_STYLESHEET);
+        toggleDarkMode(darkMode);
 
         setWidth(width);
         setHeight(height);

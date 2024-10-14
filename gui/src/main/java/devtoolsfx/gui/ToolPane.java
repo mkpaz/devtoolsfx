@@ -5,6 +5,7 @@ import devtoolsfx.connector.ConnectorOptions;
 import devtoolsfx.connector.Env;
 import devtoolsfx.connector.HighlightOptions;
 import devtoolsfx.event.*;
+import devtoolsfx.gui.controls.Dialog;
 import devtoolsfx.gui.controls.TabLine;
 import devtoolsfx.gui.env.EnvironmentTab;
 import devtoolsfx.gui.eventlog.EventLogTab;
@@ -24,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -42,6 +44,7 @@ public final class ToolPane extends BorderPane {
 
     private static final Logger LOGGER = System.getLogger(ToolPane.class.getName());
     private static final PseudoClass ACTIVE = PseudoClass.getPseudoClass("active");
+    private static final PseudoClass DARK_MODE = PseudoClass.getPseudoClass("dark");
 
     // we can't use close() because we are not in FXThread
     private final Connector connector;
@@ -91,7 +94,8 @@ public final class ToolPane extends BorderPane {
         createLayout();
         initListeners();
 
-        getStylesheets().add(GUI.USER_AGENT_STYLESHEET);
+        toggleDarkMode(preferences.getDarkMode());
+
         tabLine.selectTab(InspectorTab.TAB_NAME);
         startListenToEvents(false);
     }
@@ -247,7 +251,12 @@ public final class ToolPane extends BorderPane {
         LOGGER.log(Level.WARNING, Formatters.exceptionToString(e));
     }
 
-    ///////////////////////////////////////////////////////////////////////////
+    @Override
+    public String getUserAgentStylesheet() {
+        return GUI.USER_AGENT_STYLESHEET;
+    }
+
+///////////////////////////////////////////////////////////////////////////
     // UI construction                                                       //
     ///////////////////////////////////////////////////////////////////////////
 
@@ -282,6 +291,8 @@ public final class ToolPane extends BorderPane {
         preferences.showLayoutBoundsProperty().subscribe(refreshSelectionHandler);
         preferences.showBoundsInParentProperty().subscribe(refreshSelectionHandler);
         preferences.showBaselineProperty().subscribe(refreshSelectionHandler);
+
+        preferences.darkModeProperty().addListener((obs, old, val) -> toggleDarkMode(val));
 
         tabLine.setOnTabSelect(tab -> {
             switch (tab) {
@@ -376,5 +387,12 @@ public final class ToolPane extends BorderPane {
                 // if there's no specific event here, then it's just for logging
             }
         }
+    }
+
+    private void toggleDarkMode(boolean darkMode) {
+        pseudoClassStateChanged(DARK_MODE, darkMode);
+        Window.getWindows().stream()
+            .filter(w -> w instanceof Dialog<?>)
+            .forEach(dialog -> ((Dialog<?>) dialog).toggleDarkMode(darkMode));
     }
 }

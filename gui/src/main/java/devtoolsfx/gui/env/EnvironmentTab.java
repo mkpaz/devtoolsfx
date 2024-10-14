@@ -52,11 +52,13 @@ public class EnvironmentTab extends VBox {
     );
     private @Nullable Dialog<TextView> textViewDialog = null;
 
+    private final ToolPane toolPane;
     private final Env env;
 
     public EnvironmentTab(ToolPane toolPane) {
         super();
 
+        this.toolPane = toolPane;
         this.env = toolPane.getConnector().getEnv();
 
         createLayout();
@@ -229,7 +231,13 @@ public class EnvironmentTab extends VBox {
 
     private Dialog<TextView> getOrCreateTextViewDialog() {
         if (textViewDialog == null) {
-            textViewDialog = new Dialog<>(new TextView(), "Details", 640, 480);
+            textViewDialog = new Dialog<>(
+                new TextView(),
+                "Details",
+                640,
+                480,
+                toolPane.getPreferences().getDarkMode()
+            );
         }
 
         return textViewDialog;

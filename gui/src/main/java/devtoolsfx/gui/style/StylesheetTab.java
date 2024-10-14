@@ -153,7 +153,13 @@ public final class StylesheetTab extends VBox {
 
     private Dialog<TextView> getOrCreateTextViewDialog() {
         if (textViewDialog == null) {
-            textViewDialog =  new Dialog<>(new TextView(), "Source Code", 640, 480);
+            textViewDialog = new Dialog<>(
+                new TextView(),
+                "Source Code",
+                640,
+                480,
+                toolPane.getPreferences().getDarkMode()
+            );
         }
 
         return textViewDialog;

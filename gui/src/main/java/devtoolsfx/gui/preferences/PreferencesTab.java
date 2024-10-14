@@ -33,6 +33,7 @@ public class PreferencesTab extends VBox {
     private void createLayout() {
         getChildren().setAll(
             createSceneGraphGroup(),
+            createAppearanceGroup(),
             createInspectionGroup(),
             createEventLogGroup()
         );
@@ -71,6 +72,17 @@ public class PreferencesTab extends VBox {
         );
 
         return createPreferencesGroup("Scene Graph", content);
+    }
+
+    private VBox createAppearanceGroup() {
+        var darkModeToggle = new CheckBox("Dark Mode");
+        darkModeToggle.selectedProperty().bindBidirectional(
+            toolPane.getPreferences().darkModeProperty()
+        );
+
+        var content = new FlowPane(darkModeToggle);
+
+        return createPreferencesGroup("Appearance", content);
     }
 
     private VBox createInspectionGroup() {
