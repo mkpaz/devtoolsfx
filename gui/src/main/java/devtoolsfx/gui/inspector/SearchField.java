@@ -109,7 +109,7 @@ final class SearchField<T> extends HBox {
             return pane;
         };
 
-        textField.setPromptText("id or styleClass or nodeName");
+        textField.setPromptText("id or style-class or NodeName");
         textField.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(textField, Priority.ALWAYS);
         textField.setContextMenu(new TextInputContextMenu(textField));
