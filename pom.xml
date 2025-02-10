@@ -19,7 +19,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <javaVersion>21</javaVersion>
-        <javafxVersion>22</javafxVersion>
+        <javafxVersion>23</javafxVersion>
     </properties>
 
     <dependencyManagement>
