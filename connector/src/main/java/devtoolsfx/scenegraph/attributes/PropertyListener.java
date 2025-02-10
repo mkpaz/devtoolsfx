@@ -4,6 +4,8 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.value.ObservableValue;
 import org.jspecify.annotations.NullMarked;
 
+import java.lang.System.Logger.Level;
+import java.lang.reflect.InaccessibleObjectException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -21,6 +23,7 @@ import java.util.Map;
 @NullMarked
 public abstract class PropertyListener {
 
+    private static final System.Logger LOGGER = System.getLogger(PropertyListener.class.getName());
     public static final String PROPERTY_SUFFIX = "Property";
 
     private final Map<ObservableValue<?>, String> properties = new HashMap<>();
@@ -57,7 +60,13 @@ public abstract class PropertyListener {
 
             Class<?> returnType = method.getReturnType();
             if (ObservableValue.class.isAssignableFrom(returnType)) {
-                method.setAccessible(true);
+                // suppress InaccessibleObjectException on classes not exported from javafx-controls module
+                try {
+                    method.setAccessible(true);
+                } catch (InaccessibleObjectException e) {
+                    LOGGER.log(Level.INFO, e.getMessage());
+                }
+
                 ObservableValue<?> property = (ObservableValue<?>) method.invoke(target);
 
                 String propertyName = method.getName().substring(0, method.getName().lastIndexOf(PROPERTY_SUFFIX));
