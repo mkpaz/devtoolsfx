@@ -11,6 +11,10 @@
 
     <artifactId>devtoolsfx-demo</artifactId>
 
+    <name>DevToolsFX Demo</name>
+    <description>A tool for navigating JavaFX application's scene graph and exploring node properties</description>
+    <url>https://github.com/mkpaz/devtoolsfx</url>
+
     <dependencies>
         <dependency>
             <groupId>io.github.mkpaz</groupId>
@@ -39,13 +43,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
             </plugin>
         </plugins>
     </build>

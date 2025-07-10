@@ -11,6 +11,10 @@
 
     <artifactId>devtoolsfx-connector</artifactId>
 
+    <name>DevToolsFX Connector</name>
+    <description>A tool for navigating JavaFX application's scene graph and exploring node properties</description>
+    <url>https://github.com/mkpaz/devtoolsfx</url>
+
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>

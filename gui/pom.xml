@@ -11,6 +11,10 @@
 
     <artifactId>devtoolsfx-gui</artifactId>
 
+    <name>DevToolsFX GUI</name>
+    <description>A tool for navigating JavaFX application's scene graph and exploring node properties</description>
+    <url>https://github.com/mkpaz/devtoolsfx</url>
+
     <dependencies>
         <dependency>
             <groupId>io.github.mkpaz</groupId>
