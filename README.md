@@ -21,7 +21,7 @@ Maven:
 <dependency>
     <groupId>io.github.mkpaz</groupId>
     <artifactId>devtoolsfx-gui</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -29,7 +29,7 @@ Gradle:
 
 ```groovy
 dependencies {
-    implementation 'io.github.mkpaz:devtoolsfx-gui:1.0.0'
+    implementation 'io.github.mkpaz:devtoolsfx-gui:1.0.1'
 }
 ```
 
